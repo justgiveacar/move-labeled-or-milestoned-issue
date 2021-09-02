@@ -9,6 +9,7 @@ async function run() {
     const labelName = core.getInput("label-name");
     const milestoneName = core.getInput("milestone-name");
     const ignoreList = core.getInput("columns-to-ignore");
+    const deleteCard = core.getInput("delete-card");
     const octokit = new github.GitHub(myToken);
     const context = github.context;
 
@@ -64,9 +65,15 @@ async function run() {
             return `Card exists for issue in column ${currentColumn}. Column specified to be ignored, not moving issue.`;
         }
         else if (cardId != null){
+            if (deleteCard == "true"){
+                return await deleteExistingCard(octokit, columnId, cardId);
+            }
             // card already exists for the issue
             // move card to the appropriate column
-            return await moveExistingCard(octokit, columnId, cardId);
+            else {
+                return await moveExistingCard(octokit, columnId, cardId);
+            }
+
         } else {
             // card is not present
             // create new card in the appropriate column
@@ -96,6 +103,14 @@ async function moveExistingCard(octokit, columnId, cardId){
         column_id: columnId
     });
     return `Succesfully moved card #${cardId} to column #${columnId} !`;
+}
+
+async function deleteExistingCard(octokit, columnId, cardId){
+    console.log(`A card already exists for the pull request. Attempting to delete card #${cardId}`);
+    await octokit.projects.deleteCard({
+        card_id: cardId
+    });
+    return `Succesfully deleted card #${cardId} !`;
 }
 
 async function tryGetColumnAndCardInformation(columnName, projectUrl, token, issueOrPrDatabaseId){
