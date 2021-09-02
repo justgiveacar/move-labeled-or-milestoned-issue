@@ -64,11 +64,11 @@ async function run() {
             // card is present in a column that we want to ignore, don't move or do anything
             return `Card exists for issue in column ${currentColumn}. Column specified to be ignored, not moving issue.`;
         }
+
         else if (cardId != null){
-            console.log(deleteCard);
-            console.log(deleteCard == "true");
-            console.log(deleteCard === "true");
-            if (deleteCard == "true"){
+            console.log(`deleteCard is: ${deleteCard}`);
+
+            if (deleteCard === "true"){
                 return await deleteExistingCard(octokit, columnId, cardId);
             }
             // card already exists for the issue
