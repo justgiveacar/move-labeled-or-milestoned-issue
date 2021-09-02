@@ -22,6 +22,9 @@ inputs:
   columns-to-ignore:
     description: 'Comma separated list of columns to ignore. If a card/issue is already in one of these columns, it will not be moved. Use `*` to ignore all columns'
     required: false
+  delete-card:
+    description: '"true" if you want to delete the card from the project'
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'
