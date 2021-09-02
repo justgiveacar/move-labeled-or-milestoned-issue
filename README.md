@@ -20,6 +20,7 @@ This action can be used for projects that are linked and setup at the org level 
 | label-name | The label that should trigger an issue to be moved to a specific column (mutually exclusive with milestone-name) |
 | milestone-name | The milestone that should trigger an issue to be moved to a specific column (mutually exclusive with label-name) |
 | columns-to-ignore | Comma separated list of column names that should be ignored. If an issue/card already exists in a column with one of the names, it will be ignored. Use `*` to ignore all columns. This is optional|
+| delete-card | "true" if you want to delete the card from the project. Please don't provide `column-name` if it is `true`|
 
 
 ### Creating an action-token
