@@ -42,7 +42,7 @@ jobs:
   Move_Labeled_Issue_On_Project_Board:
     runs-on: ubuntu-latest
     steps:
-    - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
+    - uses: justgiveacar/move-labeled-or-milestoned-issue@v3.0
       with:
         action-token: "${{ secrets.MY_TOKEN }}"
         project-url: "https://github.com/orgs/github/projects/1"
@@ -51,6 +51,23 @@ jobs:
         columns-to-ignore: "In Review,Ready to deploy,Done"
  ```
 
+```
+on:
+  issues:
+    types: [labeled]
+jobs:
+  Move_Labeled_Issue_On_Project_Board:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: justgiveacar/move-labeled-or-milestoned-issue@v3.0
+      with:
+        action-token: "${{ secrets.MY_TOKEN }}"
+        project-url: "https://github.com/orgs/github/projects/1"
+        column-name: "On Deck"
+        delete-card: "true"
+ ```
+ 
+ 
 ### Example YAML (milestone)
 
 This YAML is meant to be triggered whenever an issue has been milestoned.
@@ -63,7 +80,7 @@ jobs:
   Move_Milestoned_Issue_On_Project_Board:
     runs-on: ubuntu-latest
     steps:
-    - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
+    - uses: justgiveacar/move-labeled-or-milestoned-issue@v3.0
       with:
         action-token: "${{ secrets.MY_TOKEN }}"
         project-url: "https://github.com/orgs/github/projects/1"
